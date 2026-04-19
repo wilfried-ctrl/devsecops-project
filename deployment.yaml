@@ -15,11 +15,13 @@ spec:
         app: flask-api
     spec:
       containers:
-      - name: flask-api
-        image: flask-api:latest
-        ports:
-        - containerPort: 5000
-        # securityContext manquant intentionnellement — pour test Conftest
-        # securityContext:
-        #   runAsNonRoot: true
-
+        - name: flask-api
+          image: flask-api:latest
+          ports:
+            - containerPort: 5000
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
